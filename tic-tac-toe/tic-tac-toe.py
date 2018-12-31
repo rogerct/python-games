@@ -32,12 +32,12 @@ def make_move(board, letter, move):
 def is_winner(bo, le):
   return ((bo[7] == le and bo[8] == le and bo[9] == le) or
 
-  (bo[4] == le and bo[5] == le and bo[6] == le)
-  (bo[1] == le and bo[2] == le and bo[3] == le)
-  (bo[7] == le and bo[4] == le and bo[1] == le)
-  (bo[8] == le and bo[5] == le and bo[2] == le)
-  (bo[9] == le and bo[6] == le and bo[3] == le)
-  (bo[7] == le and bo[5] == le and bo[3] == le)
+  (bo[4] == le and bo[5] == le and bo[6] == le) or
+  (bo[1] == le and bo[2] == le and bo[3] == le) or
+  (bo[7] == le and bo[4] == le and bo[1] == le) or
+  (bo[8] == le and bo[5] == le and bo[2] == le) or
+  (bo[9] == le and bo[6] == le and bo[3] == le) or
+  (bo[7] == le and bo[5] == le and bo[3] == le) or
   (bo[9] == le and bo[5] == le and bo[1] == le))
 
 def get_board_copy(board):
@@ -51,8 +51,7 @@ def is_space_free(board, move):
 
 def get_player_move(board):
     move = ' '
-    while move not in '1 2 3 4 5 6 7 8 9'.split() or not
-      is_space_free(board, int(move)):
+    while move not in '1 2 3 4 5 6 7 8 9'.split() or not is_space_free(board, int(move)):
         print('What is your next move? 1-9')
         move = input()
     return int(move)
@@ -98,7 +97,47 @@ def is_board_full(board):
 
 print('Welcome to Tic-Tac-Toe!')
 
+while True:
+  the_board = [' '] * 10
+  player_letter, computer_letter = input_player_letter()
+  turn = who_goes_first()
+  print('The' + turn + 'will go first')
+  game_is_playing = True
 
+  while game_is_playing:
+    if turn == 'player':
+      draw_board(the_board)
+      move = get_player_move(the_board)
+      make_move(the_board, player_letter, move)
+
+      if is_winner(the_board, player_letter):
+          draw_board(the_board)
+          print('Hooray! You have won the game')
+      else:
+          if is_board_full(the_board):
+            draw_board(the_board)
+            print('The game is a tie')
+            break
+          else:
+            turn = 'computer'
+    else:
+        move = get_computer_move(the_board, computer_letter)
+        make_move(the_board, computer_letter, move)
+
+        if is_winner(the_board, computer_letter):
+            draw_board(the_board)
+            print('The computer has beaten you. YOU LOSE')
+            game_is_playing = False
+        else:
+            if is_board_full(the_board):
+                draw_board(the_board)
+                print('The game is a tie!')
+                break
+            else:
+                turn = 'player'
+  print('Do you want to play again? yes or no?')
+  if not input().lower().startswith('y'):
+      break
 
 
 
