@@ -63,3 +63,30 @@ def get_random_chests(num_chests):
           chests.append(new_chest)
 
     return chests
+
+
+def draw_board(board):
+  tens_digits_line = '    '
+
+  for i in range(1, 6):
+      tens_digits_line += (' ' * 9) + str(i)
+
+  print(tens_digits_line)
+  print('  ' + ('0123456789' * 6))
+  print()
+
+  for row in range(15):
+      if row < 10:
+          extra_space = ' '
+      else:
+          extra_space = ''
+
+      board_row = ''
+      for column in range (60):
+          board_row += board[column][row]
+
+      print('%s%s %s %s' % (extra_space, row, board_row, row))
+
+  print()
+  print('  ' + ('0123456789' * 6))
+  print(tens_digits_line)
