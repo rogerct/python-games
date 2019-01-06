@@ -90,3 +90,12 @@ def draw_board(board):
   print()
   print('  ' + ('0123456789' * 6))
   print(tens_digits_line)
+
+def get_random_chests(num_chests):
+    chests = []
+    while len(chests) < num_chests:
+      new_chest = [random.randint(0, 59), random.randint(0, 14)]
+      if new_chest not in  chests:
+          chests.append(new_chest)
+
+    return chests
