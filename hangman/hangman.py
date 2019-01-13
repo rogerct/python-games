@@ -71,7 +71,7 @@ def display_board(missed_letters, correct_letters, secret_word):
 
 def get_guess(already_guessed):
   while True:
-    print('Guess a letter.')
+    print('Guess a letter!')
     guess = input()
     guess = guess.lower()
     if len(guess) != 1:
