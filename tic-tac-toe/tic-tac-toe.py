@@ -1,4 +1,5 @@
 import random
+import time
 
 def draw_board(board):
 
@@ -113,6 +114,8 @@ while True:
       if is_winner(the_board, player_letter):
           draw_board(the_board)
           print('Hooray! You have won the game')
+          time.sleep(2)
+          print('you are the BEST')
       else:
           if is_board_full(the_board):
             draw_board(the_board)
